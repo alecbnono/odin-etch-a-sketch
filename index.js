@@ -1,28 +1,46 @@
 "use strict";
 
+const btn = document.querySelector("button");
+const grid = document.querySelector("#grid");
+let squaresList = document.querySelectorAll(".square");
+
+let size = 16;
+let squareSide = 480/size;
+
 function colorBlack (e) {
     e.target.style.backgroundColor = "black";
 }
 
-const grid = document.querySelector("#grid");
 
-let size = 16;
-let squareSide = 960/16;
+function createPixels() {
+    for (let i = 0; i < size * size; i++) {
+        const square = document.createElement("div");
 
-for (let i = 0; i < size * size; i++) {
-    const square = document.createElement("div");
+        square.style.width = `${squareSide}px`;
+        square.style.height = `${squareSide}px`;
 
-    square.style.width = `${squareSide}px`;
-    square.style.height = `${squareSide}px`;
+        square.classList.add("square");
 
-    square.classList.add("square");
+        grid.appendChild(square);
+    }
 
-    grid.appendChild(square);
+    squaresList = document.querySelectorAll(".square");
+    squaresList.forEach((e) => e.addEventListener("mouseenter", colorBlack));
 }
 
-const squaresList = document.querySelectorAll(".square");
 
-console.log(squaresList);
+btn.addEventListener("click", () => {
 
-squaresList.forEach((e) => e.addEventListener("mouseenter", colorBlack));
+    size = Number(prompt("Custom pixel side length:"));
+    squareSide = 480/size;
 
+    squaresList = document.querySelectorAll(".square");
+
+    squaresList.forEach((e) => {
+        e.remove();
+    })
+
+    createPixels();
+})
+
+createPixels();
