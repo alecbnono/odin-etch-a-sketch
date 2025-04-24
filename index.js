@@ -8,7 +8,7 @@ let size = 16;
 let squareSide = 480/size;
 
 function colorBlack (e) {
-    e.target.style.backgroundColor = "black";
+    e.target.style.opacity = Number(e.target.style.opacity) + 0.1;
 }
 
 
